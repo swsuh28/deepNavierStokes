@@ -121,7 +121,7 @@ dt_bl = min(dx_bl, dx_bl**2*Re)*0.5
 Nt_bl = int(t_final/dt_bl)
 dt_bl = t_final/Nt_bl
 
-rx_list = np.array([1,2,4,8,16]) # Grid size ratios
+rx_list = np.array([1,2,4,8]) # Grid size ratios
 
 # Init field
 rx_max = max(rx_list)

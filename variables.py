@@ -60,7 +60,7 @@ numInputUnits = 5*dim # Input: 5-point stencil for all 3 physical variables
 numHiddenLayers = 3
 numHiddenUnits = 100
 
-numIter = 500 # No. of iteration (== No. of training set)
+numIter = 1000 # No. of iteration (== No. of training set)
 learningRate = 0.001 # Learning rate
 beta_rmsprop = 0.9 # Moving average parameter (RMSprop)
 epsilon = 1e-8 # Prevents division by zero
