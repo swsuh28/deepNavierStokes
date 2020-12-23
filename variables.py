@@ -56,7 +56,7 @@ adj = np.zeros([Nt, 4, dim, Nx]) # Adjoints
 torch.set_default_dtype(torch.float64) # Set torch precision
 
 # Default NN settings
-numInputUnits = 5*dim # Input: 5-point stencil for all 3 physical variables
+numInputUnits = 7*dim # Input: 5-point stencil for all 3 physical variables
 numHiddenLayers = 3
 numHiddenUnits = 100
 
@@ -103,7 +103,7 @@ class Model(nn.Module):
 
 			# Xavier initialization
 			self.weights.append(nn.Parameter(torch.randn(numPreUnits,\
-							numNextUnits)/np.sqrt(numPreUnits)/10))
+							numNextUnits)/np.sqrt(numPreUnits)/2))
 
 
 	def forward(self, inputs):
