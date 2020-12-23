@@ -102,18 +102,30 @@ class Model(nn.Module):
 				numNextUnits = self.numHiddenUnits
 
 			# Xavier initialization
-			self.weights.append(nn.Parameter(torch.randn(numPreUnits,\
-							numNextUnits)/np.sqrt(numPreUnits)/10))
+			self.weights.append(nn.Parameter(torch.randn(numPreUnits+1,\
+							numNextUnits)/np.sqrt(numPreUnits+1)/10))
+
+		# Add 2 more layers (for elementwise product)
+		self.weights.append(nn.Parameter(torch.randn(numInputUnits+1,\
+							numHiddenUnits)/np.sqrt(numInputUnits+1)/10))
+		self.weights.append(nn.Parameter(torch.randn(numInputUnits+1,\
+							numHiddenUnits)/np.sqrt(numInputUnits+1)/10))
 
 
 	def forward(self, inputs):
 		# Forward propagation
 		a = inputs
-		for i in range(len(self.weights)-1):
-			z = a.mm(self.weights[i])
+		g1 = torch.tanh(a.mm(self.weights[-2][1:,:])+self.weights[-2][0,:])
+		g2 = torch.tanh(a.mm(self.weights[-1][1:,:])+self.weights[-1][0,:])
+		for i in range(len(self.weights)-2-1):
+			z = a.mm(self.weights[i][1:,:])+self.weights[i][0,:]
 			a = torch.tanh(z)
+			if i == 1:
+				a = a*g1
+			elif i == 2:
+				a = a*g2
 			# a = z
-		output = a.mm(self.weights[-1])
+		output = a.mm(self.weights[-3][1:,:])+self.weights[-3][0,:]
 		return output
 
 

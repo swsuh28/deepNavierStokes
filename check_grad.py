@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 
 
 # Initialize field variables
-init_field_mms()
-# init_field_rand()
+# init_field_mms()
+init_field_rand()
 
 plt.plot(x, field_init[1,:])
 plt.show()
@@ -19,8 +19,8 @@ plt.show()
 
 
 # Generate training dataset : DNS / MMS
-# get_exact_dns()
-get_exact_mms()
+get_exact_dns()
+# get_exact_mms()
 # -> Saved to field_exact
 
 
@@ -40,22 +40,22 @@ for n in range(Nt):
 	field_0 = field_4.copy()
 
 	# RK4 substep 0 -> 1
-	h1, h1_grad_param, h1_grad_field = nn_force(field_0) # FP + BP
+	h1, h1_grad_param, h1_grad_field = nn_force(field_0, net_list) # FP + BP
 	k1 = navier_stokes(field_0, t) + h1
 	field_1 = field_0 + 0.5*dt*k1
 
 	# RK4 substep 0 -> 2
-	h2, h2_grad_param, h2_grad_field = nn_force(field_1)
+	h2, h2_grad_param, h2_grad_field = nn_force(field_1, net_list)
 	k2 = navier_stokes(field_1, t+0.5*dt) + h2
 	field_2 = field_0 + 0.5*dt*k2
 
 	# RK4 substep 0 -> 3
-	h3, h3_grad_param, h3_grad_field = nn_force(field_2)
+	h3, h3_grad_param, h3_grad_field = nn_force(field_2, net_list)
 	k3 = navier_stokes(field_2, t+0.5*dt) + h3
 	field_3 = field_0 + dt*k3
 
 	# RK4 substep 0 -> 4
-	h4, h4_grad_param, h4_grad_field = nn_force(field_3)
+	h4, h4_grad_param, h4_grad_field = nn_force(field_3, net_list)
 	k4 = navier_stokes(field_3, t+dt) + h4
 	field_4 = field_0 + (dt/6)*(k1+2*(k2+k3)+k4)
 
@@ -204,22 +204,22 @@ for exp in range(numExp):
 		field_0 = field_4
 
 		# RK4 substep 0 -> 1
-		h1, h1_grad_param, h1_grad_field = nn_force(field_0) # FP + BP
+		h1, h1_grad_param, h1_grad_field = nn_force(field_0, net_list) # FP + BP
 		k1 = navier_stokes(field_0, t) + h1
 		field_1 = field_0 + 0.5*dt*k1
 
 		# RK4 substep 0 -> 2
-		h2, h2_grad_param, h2_grad_field = nn_force(field_1)
+		h2, h2_grad_param, h2_grad_field = nn_force(field_1, net_list)
 		k2 = navier_stokes(field_1, t+0.5*dt) + h2
 		field_2 = field_0 + 0.5*dt*k2
 
 		# RK4 substep 0 -> 3
-		h3, h3_grad_param, h3_grad_field = nn_force(field_2)
+		h3, h3_grad_param, h3_grad_field = nn_force(field_2, net_list)
 		k3 = navier_stokes(field_2, t+0.5*dt) + h3
 		field_3 = field_0 + dt*k3
 
 		# RK4 substep 0 -> 4
-		h4, h4_grad_param, h4_grad_field = nn_force(field_3)
+		h4, h4_grad_param, h4_grad_field = nn_force(field_3, net_list)
 		k4 = navier_stokes(field_3, t+dt) + h4
 		field_4 = field_0 + (dt/6)*(k1+2*(k2+k3)+k4)
 
