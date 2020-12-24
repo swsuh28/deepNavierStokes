@@ -17,10 +17,10 @@ gamma = 1.4
 
 # Numerics settings
 
-Nx = 32
+Nx = 64
 dx = L/Nx
 t_final = 1
-rx = 8 # Ratio of No. of grids in DNS / LES
+rx = 4 # Ratio of No. of grids in DNS / LES
 rt = rx
 
 # Timestep

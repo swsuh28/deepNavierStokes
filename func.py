@@ -14,7 +14,7 @@ def get_filtered_noise():
 	u = np.random.randn(Nx_dns)
 
 	# Filtering
-	k_max = np.pi / (dx*2) # dx_filter = 2 * dx_LES
+	k_max = np.pi / (dx*4) # dx_filter = 2 * dx_LES
 	k = np.fft.fftfreq(Nx_dns) * 2*np.pi / dx_dns
 	uk = np.fft.fft(u)
 	for i in range(Nx_dns): # Fourier cutoff filter

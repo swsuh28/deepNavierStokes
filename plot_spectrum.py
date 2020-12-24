@@ -89,10 +89,13 @@ for j in range(rlz):
 
 	print()
 
+	u_dns = field_exact_dns[-1,-1,1,:]/field_exact_dns[-1,-1,0,:]
+	u_iles = field_iles[-1,-1,1,:]/field_iles[-1,-1,0,:]
+	u_les = field[-1,-1,1,:]/field[-1,-1,0,:]
 
-	E_dns, k_dns = get_energy_spectrum(field_exact_dns[-1,-1,2,:], Nx_dns)
-	E_iles, k_iles = get_energy_spectrum(field_iles[-1,-1,2,:], Nx)
-	E_les, k_les = get_energy_spectrum(field[-1,-1,2,:], Nx)
+	E_dns, k_dns = get_energy_spectrum(0.5*u_dns**2, Nx_dns)
+	E_iles, k_iles = get_energy_spectrum(0.5*u_iles**2, Nx)
+	E_les, k_les = get_energy_spectrum(0.5*u_les**2, Nx)
 
 	E_dns_avg += E_dns/rlz
 	E_iles_avg += E_iles/rlz
@@ -193,9 +196,13 @@ for j in range(rlz):
 	# plt.show()
 
 
-	E_dns, k_dns = get_energy_spectrum(field_exact_dns[-1,-1,2,:], Nx_dns)
-	E_iles, k_iles = get_energy_spectrum(field_iles[-1,-1,2,:], Nx)
-	E_les, k_les = get_energy_spectrum(field[-1,-1,2,:], Nx)
+	u_dns = field_exact_dns[-1,-1,1,:]/field_exact_dns[-1,-1,0,:]
+	u_iles = field_iles[-1,-1,1,:]/field_iles[-1,-1,0,:]
+	u_les = field[-1,-1,1,:]/field[-1,-1,0,:]
+
+	E_dns, k_dns = get_energy_spectrum(0.5*u_dns**2, Nx_dns)
+	E_iles, k_iles = get_energy_spectrum(0.5*u_iles**2, Nx)
+	E_les, k_les = get_energy_spectrum(0.5*u_les**2, Nx)
 
 	E_dns_avg += E_dns/rlz
 	E_iles_avg += E_iles/rlz
