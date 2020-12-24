@@ -56,7 +56,7 @@ adj = np.zeros([Nt, 4, dim, Nx]) # Adjoints
 torch.set_default_dtype(torch.float64) # Set torch precision
 
 # Default NN settings
-numInputUnits = 7*dim # Input: 5-point stencil for all 3 physical variables
+numInputUnits = 5*dim # Input: 5-point stencil for all 3 physical variables
 numHiddenLayers = 3
 numHiddenUnits = 100
 
